@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from model_practice.models import Book,Cart,EBook
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.db.models import Sum
+from django.db.models.functions import Coalesce
 def run_script(request):
     print("*******************************************************************************************************")
     # book = Book.objects.create(name='Python Tricks', price=1000, weight=200)
@@ -41,5 +43,13 @@ def run_script(request):
     print(ebook)
 
     # create user
-    user = get_user_model().objects.first()
+    user =User.objects.create_user('vik777eshdas998')
+    print(user)
+    # user = get_user_model().objects.first()
+    cart = Cart.objects.create(user=user)
+    cart.book.add(book)
+    cart.ebook.add(ebook)
+    print("cart",cart)
+
+    print(cart.objects.filter(pk=cart.pk))
     return HttpResponse("Script executed successfully:")
