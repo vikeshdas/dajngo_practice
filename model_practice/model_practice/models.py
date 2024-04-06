@@ -110,6 +110,7 @@ class Product(models.Model):
     name = models.CharField(
         max_length=100,
     )
+
     price = models.PositiveIntegerField(
         help_text='in cents',
     )
@@ -119,12 +120,19 @@ class Product(models.Model):
 
 
 class Book(Product):
+    f_name =models.CharField(
+        max_length=100,
+    )
     weight = models.PositiveIntegerField(
         help_text='in grams',
     )
 
 
 class EBook(Product):
+
+    m_name=models.CharField(
+        max_length=100,
+    )
     download_link = models.URLField()
 
 class Cart(models.Model):
